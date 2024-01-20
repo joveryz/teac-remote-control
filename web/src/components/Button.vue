@@ -16,6 +16,7 @@ defineProps(['header', 'icon'])
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
 
 .button-header {

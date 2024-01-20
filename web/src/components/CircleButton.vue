@@ -23,6 +23,7 @@ defineProps({
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
 }
 
 .button-circle:hover {
