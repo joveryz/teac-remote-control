@@ -6,7 +6,7 @@ import { notify } from '@kyvg/vue3-notification'
 export const sendCommand = (device: string, command: string) => {
   console.log(`sending command to device: ${device}-${command}`)
   axios
-    .get(`http://sfp.sys.ink:8000/${device}/${command}`)
+    .get(`http://sfp.sys.ink:82/${device}/${command}`)
     .then(() => {
       notify({
         title: `${device}: ${command}`,
