@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import socket
@@ -48,6 +49,13 @@ commandList = {
         "volumedown": "@KEY 12\r",
         "mute": "@KEY 1C\r",
     },
+    "roon": {
+        "backward": "roon -c previous -z AVERY-UD701",
+        "forward": "roon -c next -z AVERY-UD701",
+        "play": "roon -c play -z AVERY-UD701",
+        "pause": "roon -c pause -z AVERY-UD701",
+        "stop": "roon -c stop -z AVERY-UD701",
+    }
 }
 
 
@@ -60,12 +68,16 @@ def send_with_retry(device: str, command: str):
                 print(':'.join(hex(ord(x))[2:] for x in command))
             elif device == "dac":
                 dac_com_socket.sendall(command.encode())
+            elif device == "roon":
+                os.system(command)
             return True
         except:
             if device == "cd":
                 cd_com_socket.connect((com_server_host, cd_com_port))
             elif device == "dac":
                 dac_com_socket.connect((com_server_host, dac_com_port))
+            elif device == "root":
+                return False
             retry_count -= 1
     return False
 
