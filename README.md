@@ -3,6 +3,8 @@ This project aims to use the RS-232C to control the TEAC reference 700 series de
 
 This project includes 2 parts, web app and a server. The web app renders a remote control in web browser and send http requests to server. Server sends tcp packets to a ethernet com device. The com device connects to the TEAC devices via RS-232C directly.
 
+You can also use the web app to control Roon.
+
 # Special thanks
 Special thanks to [Jerry Wossion](https://github.com/jerrywossion) who helped a lot about Vue.
 
@@ -28,6 +30,7 @@ Special thanks to [Jerry Wossion](https://github.com/jerrywossion) who helped a 
     - pip
     - fastapi
     - uvicorn
+    - RoonCommandLine // only if you want to control roon
 
 2. Copy trc-*.service to /etc/systemd/system. Service files are under web and servcer folders.
     - systemctl daemon-reload
@@ -43,3 +46,5 @@ Special thanks to [Jerry Wossion](https://github.com/jerrywossion) who helped a 
 6. [TEAC VRDS-701T](https://teac.jp/int/product/vrds-701t/top)
 7. [TEAC UD-701N](https://teac.jp/int/product/ud-701n/top)
 8. [TEAC RS-232C control specification](https://teac.jp/downloads/products/teac/rs232c/teac_rs232c_r1.1.pdf)
+9. [Roon](https://roon.app/en/)
+10. [Roon Command Line](https://github.com/doctorfree/RoonCommandLine)
