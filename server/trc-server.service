@@ -2,7 +2,7 @@
 After=network.target
 
 [Service]
-Type=notify
+Type=simple
 User=root
 Group=root
 WorkingDirectory=/home/ztb5129/service/service-data/teac-remote-control/server
