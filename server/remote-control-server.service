@@ -1,0 +1,12 @@
+[Unit]
+After=network.target
+
+[Service]
+Type=notify
+User=root
+Group=root
+WorkingDirectory=/home/ztb5129/service/service-data/teac-remote-control/server
+ExecStart=/usr/local/bin/uvicorn server:app --reload --host 0.0.0.0 --port 8000
+
+[Install]
+WantedBy=multi-user.target
