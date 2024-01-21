@@ -3,15 +3,16 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import { notify } from '@kyvg/vue3-notification'
 
-export const sendCommand = (device: string, command: string) => {
+export const sendCommand = async (device: string, command: string) => {
   console.log(`sending command to device: ${device}-${command}`)
-  axios
+  return await axios
     .get(`http://sfp.sys.ink:82/${device}/${command}`)
-    .then(() => {
+    .then((response: any) => {
       notify({
         title: `${device}: ${command}`,
         type: 'success'
       })
+      return response.data
     })
     .catch((exception) => {
       notify({

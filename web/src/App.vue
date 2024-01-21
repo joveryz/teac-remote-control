@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Button from './components/Button.vue'
 import CircleButton from './components/CircleButton.vue'
+import Display from './components/RoonDisplay.vue'
 import { sendCommand } from './utils/utils.ts'
 </script>
 
@@ -62,6 +63,10 @@ import { sendCommand } from './utils/utils.ts'
 
       <div>
         <div class="black-control-area-header">Roon</div>
+        <div style="height: 2px; background-color: white"></div>
+        <div class="display-grid">
+          <Display />
+        </div>
         <div style="height: 2px; background-color: white"></div>
         <div class="button-grid button-central">
           <Button header="PLAY" icon="fa-solid fa-play" @click="sendCommand('roon', 'play')"></Button>
@@ -133,6 +138,16 @@ main {
 
 .button-central>.button-circle {
   place-self: center;
+}
+
+.display-grid {
+  display: grid;
+  background-color: lightgrey;
+  margin: auto;
+  padding: 10px;
+  align-items: center;
+  border-radius: 3px;
+  font-size: 12px;
 }
 
 .brand-grid {
