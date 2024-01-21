@@ -2,6 +2,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import socket
+import subprocess
 
 app = FastAPI()
 origins = ["*"]
@@ -65,22 +66,22 @@ def send_with_retry(device: str, command: str):
     while retry_count > 0:
         try:
             if device == "cd":
-                cd_com_socket.sendall(command.encode())
+                res = cd_com_socket.sendall(command.encode())
                 print(':'.join(hex(ord(x))[2:] for x in command))
             elif device == "dac":
-                dac_com_socket.sendall(command.encode())
+                res = dac_com_socket.sendall(command.encode())
             elif device == "roon":
-                os.system(command)
-            return True
+                res = subprocess.check_output([command], shell=True)
+            return res
         except:
             if device == "cd":
-                cd_com_socket.connect((com_server_host, cd_com_port))
+                res = cd_com_socket.connect((com_server_host, cd_com_port))
             elif device == "dac":
-                dac_com_socket.connect((com_server_host, dac_com_port))
+                res = dac_com_socket.connect((com_server_host, dac_com_port))
             elif device == "root":
-                return False
+                return 'failed'
             retry_count -= 1
-    return False
+    return 'failed'
 
 
 @app.get("/keepalive")
@@ -91,4 +92,4 @@ def root():
 @app.get("/{device}/{command}")
 def send_command(device: str, command: str):
     res = send_with_retry(device, commandList[device][command])
-    return {"result": "success" if res else "fail"}
+    return {"result": res}
