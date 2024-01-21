@@ -20,7 +20,7 @@ defineProps(['header', 'icon'])
 }
 
 .button-header {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: bold;
 }
 </style>

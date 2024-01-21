@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     async updateRoonInfo() {
-      var res = await sendCommand('roon', 'getinfo')
+      var res = await sendCommand('roon', 'getinfo', false)
       this.$refs.roonInfo.innerText = res.result;
     }
   }

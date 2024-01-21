@@ -13,7 +13,7 @@ import { sendCommand } from './utils/utils.ts'
         <div style="height: 2px; background-color: white"></div>
         <div class="button-grid button-central">
           <Button header="POWER" icon="fa-solid fa-power-off" @click="sendCommand('dac', 'power')"></Button>
-          <Button header="DISPLAY" @click="sendCommand('dac', 'display')"></Button>
+          <Button header="DISP" @click="sendCommand('dac', 'display')"></Button>
           <Button header="INFO" icon="fa-solid fa-info" @click="sendCommand('dac', 'info')"></Button>
           <Button header="VOL" icon="fa-solid fa-plus" @click="sendCommand('dac', 'volumeup')"></Button>
           <Button header="VOL" icon="fa-solid fa-minus" @click="sendCommand('dac', 'volumedown')"></Button>
@@ -81,7 +81,7 @@ import { sendCommand } from './utils/utils.ts'
       <div class="brand-grid">
         <div style="text-align: center">
           <div style="display: flex; flex-direction: column;">
-            <span style="font-size: 26px; font-weight: bolder; font-family: 'Times New Roman'">
+            <span style="font-size: 30px; font-weight: bolder; font-family: 'Times New Roman'">
               TEAC
             </span>
             <span style="font-size: 10px; font-weight: bold;">
@@ -91,7 +91,7 @@ import { sendCommand } from './utils/utils.ts'
         </div>
         <div style="text-align: center">
           <div style="display: flex; flex-direction: column;">
-            <span style="font-size: 26px; font-weight: bolder; ">
+            <span style="font-size: 30px; font-weight: bolder; ">
               Roon
             </span>
             <span style="font-size: 10px; font-weight: bold;">
@@ -126,7 +126,7 @@ main {
 .button-grid {
   display: grid;
   background-color: lightgrey;
-  grid-template-columns: 45px 45px 45px 45px 45px;
+  grid-template-columns: 55px 55px 55px 55px 55px;
   grid-column-gap: 2px;
   grid-row-gap: 10px;
   margin: auto;
@@ -146,7 +146,9 @@ main {
   padding: 10px;
   align-items: center;
   border-radius: 3px;
-  font-size: 12px;
+  font-size: 13px;
+  font-family: 'sans-serif';
+  font-weight: bold;
 }
 
 .brand-grid {
@@ -166,7 +168,7 @@ main {
   color: white;
   border-radius: 2px;
   text-align: center;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: bold;
 }
 
