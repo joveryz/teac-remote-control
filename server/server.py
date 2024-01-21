@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import socket
 import subprocess
+from threading import Thread
+import time
 
 app = FastAPI()
 origins = ["*"]
@@ -23,7 +25,7 @@ dac_com_port = 26
 dac_com_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 dac_com_socket.connect((com_server_host, dac_com_port))
 
-commandList = {
+command_list = {
     "cd": {
         "power": "@POWER ON\r",
         "open": "@KEY 00\r",
@@ -60,26 +62,38 @@ commandList = {
     }
 }
 
+roon_info_cache = ""
+
+
+def get_roon_info():
+    global roon_info_cache
+    while True:
+        roon_info_cache = subprocess.check_output(
+            [command_list["roon"]["getinfo"]], shell=True)
+        time.sleep(1)
+
+
+roon_get_info_thread = Thread(target=get_roon_info)
+roon_get_info_thread.start()
+
 
 def send_with_retry(device: str, command: str):
     retry_count = 5
     while retry_count > 0:
         try:
+            res = "success"
             if device == "cd":
-                res = cd_com_socket.sendall(command.encode())
-                print(':'.join(hex(ord(x))[2:] for x in command))
+                cd_com_socket.sendall(command.encode())
             elif device == "dac":
-                res = dac_com_socket.sendall(command.encode())
+                dac_com_socket.sendall(command.encode())
             elif device == "roon":
-                res = subprocess.check_output([command], shell=True)
+                res = roon_info_cache
             return res
         except:
             if device == "cd":
                 res = cd_com_socket.connect((com_server_host, cd_com_port))
             elif device == "dac":
                 res = dac_com_socket.connect((com_server_host, dac_com_port))
-            elif device == "root":
-                return 'failed'
             retry_count -= 1
     return 'failed'
 
@@ -91,5 +105,5 @@ def root():
 
 @app.get("/{device}/{command}")
 def send_command(device: str, command: str):
-    res = send_with_retry(device, commandList[device][command])
+    res = send_with_retry(device, command_list[device][command])
     return {"result": res}
