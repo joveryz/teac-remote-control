@@ -71,7 +71,7 @@ def get_roon_info():
     while True:
         res = subprocess.check_output(
             [command_list["roon"]["getinfo"]], shell=True)
-        m = p.match(res.replace("\n", "").replace("\t", ""))
+        m = p.match(res.decode("utf-8").replace("\n", "").replace("\t", ""))
         roon_info_cache = "Track: {}\nArtist: {}\nAlbum: {}".format(
             m.group(1), m.group(2), m.group(3))
         time.sleep(1)
