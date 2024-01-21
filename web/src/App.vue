@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Button from './components/Button.vue'
-import CircleButton from './components/CircleButton.vue'
 import Display from './components/RoonDisplay.vue'
 import { sendCommand } from './utils/utils.ts'
 </script>

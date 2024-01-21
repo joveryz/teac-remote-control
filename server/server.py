@@ -1,4 +1,4 @@
-import os
+import re
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import socket
@@ -67,9 +67,13 @@ roon_info_cache = ""
 
 def get_roon_info():
     global roon_info_cache
+    p = re.compile('.*Track: \"(.*)\"Artist: \"(.*)\"Album: \"(.*)\"State.*')
     while True:
-        roon_info_cache = subprocess.check_output(
+        res = subprocess.check_output(
             [command_list["roon"]["getinfo"]], shell=True)
+        m = p.match(res.replace("\n", "").replace("\t", ""))
+        roon_info_cache = "Track: {}\nArtist: {}\nAlbum: {}".format(
+            m.group(1), m.group(2), m.group(3))
         time.sleep(1)
 
 

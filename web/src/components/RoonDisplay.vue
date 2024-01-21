@@ -3,21 +3,17 @@ import { sendCommand } from '../utils/utils.ts'
 export default {
   data() {
     return {
-      text: "Track: unknown\nArtist: unknown\nAlbum: unknown"
+      text: this.updateRoonInfo()
     }
   },
   mounted() {
-    setTimeout(async () => {
+    setInterval(async () => {
       await this.updateRoonInfo()
-    }, 0)
+    }, 2000)
   },
   methods: {
     async updateRoonInfo() {
-      while (true) {
-        var res = await sendCommand('roon', 'getinfo')
-        var info = /Track: \"(.*)\"Artist: \"(.*)\"Album: \"(.*)\"State/.exec(res.result.replace(/\n/g, "").replace(/\t/g, ""))
-        this.$refs.roonInfo.innerText = `Track: ${info[1]}\nArtist: ${info[2]}\nAlbum: ${info[3]}`;
-      }
+      this.$refs.roonInfo.innerText = await sendCommand('roon', 'getinfo');
     }
   }
 }
