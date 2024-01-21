@@ -55,6 +55,7 @@ commandList = {
         "play": "roon -c play -z AVERY-UD701",
         "pause": "roon -c pause -z AVERY-UD701",
         "stop": "roon -c stop -z AVERY-UD701",
+        "getinfo": "roon -N -z AVERY-UD701",
     }
 }
 
