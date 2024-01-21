@@ -15,8 +15,8 @@ import { sendCommand } from './utils/utils.ts'
           <Button header="POWER" icon="fa-solid fa-power-off" @click="sendCommand('dac', 'power')"></Button>
           <Button header="DISPLAY" @click="sendCommand('dac', 'display')"></Button>
           <Button header="INFO" icon="fa-solid fa-info" @click="sendCommand('dac', 'info')"></Button>
-          <Button header="VOLUME" icon="fa-solid fa-plus" @click="sendCommand('dac', 'volumeup')"></Button>
-          <Button header="VOLUME" icon="fa-solid fa-minus" @click="sendCommand('dac', 'volumedown')"></Button>
+          <Button header="VOL" icon="fa-solid fa-plus" @click="sendCommand('dac', 'volumeup')"></Button>
+          <Button header="VOL" icon="fa-solid fa-minus" @click="sendCommand('dac', 'volumedown')"></Button>
         </div>
         <div style="height: 2px; background-color: white"></div>
         <div class="button-grid button-central">
@@ -28,7 +28,7 @@ import { sendCommand } from './utils/utils.ts'
         </div>
         <div style="height: 2px; background-color: white"></div>
         <div class="button-grid button-central">
-          <Button header="HP(6.3)." icon="fa-solid fa-headphones" @click="sendCommand('dac', 'hp63')"></Button>
+          <Button header="HP(6.3)" icon="fa-solid fa-headphones" @click="sendCommand('dac', 'hp63')"></Button>
           <div></div>
           <Button header="HP(XLR4)" icon="fa-solid fa-headphones" @click="sendCommand('dac', 'hpxlr4')"></Button>
           <div></div>
@@ -43,7 +43,7 @@ import { sendCommand } from './utils/utils.ts'
         <div style="height: 2px; background-color: white"></div>
         <div class="button-grid button-central">
           <Button header="POWER" icon="fa-solid fa-power-off" @click="sendCommand('cd', 'power')"></Button>
-          <Button header="DISPLAY" @click="sendCommand('cd', 'display')"></Button>
+          <Button header="DISP" @click="sendCommand('cd', 'display')"></Button>
           <Button header="INFO" icon="fa-solid fa-info" @click="sendCommand('cd', 'info')"></Button>
           <div></div>
           <Button header="OPEN" icon="fa-solid fa-eject" @click="sendCommand('cd', 'open')"></Button>
