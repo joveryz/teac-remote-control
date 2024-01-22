@@ -69,12 +69,17 @@ def get_roon_info():
     global roon_info_cache
     p = re.compile('.*Track: \"(.*)\"Artist: \"(.*)\"Album: \"(.*)\"State.*')
     while True:
-        res = subprocess.check_output(
-            [command_list["roon"]["getinfo"]], shell=True)
-        m = p.match(res.decode("utf-8").replace("\n", "").replace("\t", ""))
-        roon_info_cache = "Track: {}\nArtist: {}\nAlbum: {}".format(
-            m.group(1), m.group(2), m.group(3))
-        time.sleep(1)
+        try:
+            res = subprocess.check_output(
+                [command_list["roon"]["getinfo"]], shell=True)
+            m = p.match(res.decode(
+                "utf-8").replace("\n", "").replace("\t", ""))
+            roon_info_cache = "Track: {}\nArtist: {}\nAlbum: {}".format(
+                m.group(1), m.group(2), m.group(3))
+        except Exception as ex:
+            print("get roon info failed, Exception: " + ex)
+        finally:
+            time.sleep(1)
 
 
 roon_get_info_thread = Thread(target=get_roon_info)
@@ -91,7 +96,7 @@ def send_with_retry(device: str, command: str):
             elif device == "dac":
                 dac_com_socket.sendall(command.encode())
             elif device == "roon":
-                res = roon_info_cache
+                res = subprocess.check_output([command], shell=True)
             return res
         except:
             if device == "cd":
@@ -109,5 +114,6 @@ def root():
 
 @app.get("/{device}/{command}")
 def send_command(device: str, command: str):
-    res = send_with_retry(device, command_list[device][command])
-    return {"result": res}
+    if device == "roon" and command == "getinfo":
+        return {"result": roon_info_cache}
+    return {"result": send_with_retry(device, command_list[device][command])}
