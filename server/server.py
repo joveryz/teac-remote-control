@@ -80,6 +80,7 @@ def get_roon_info():
             print("get roon info failed, Exception: " + ex)
         finally:
             time.sleep(1)
+        print("roon info: " + roon_info_cache)
 
 
 roon_get_info_thread = Thread(target=get_roon_info)
