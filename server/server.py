@@ -77,7 +77,7 @@ def get_roon_info():
             roon_info_cache = "Track: {}\nArtist: {}\nAlbum: {}".format(
                 m.group(1), m.group(2), m.group(3))
         except Exception as ex:
-            print("get roon info failed, Exception: " + ex)
+            print("get roon info failed, Exception: " + str(ex))
         finally:
             time.sleep(1)
         print("roon info: " + roon_info_cache)
