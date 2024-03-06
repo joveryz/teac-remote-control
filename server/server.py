@@ -59,6 +59,9 @@ command_list = {
         "pause": "roon -c pause -z AVERY-UD701",
         "stop": "roon -c stop -z AVERY-UD701",
         "getinfo": "roon -N -z AVERY-UD701",
+    },
+    "sys": {
+        "restart": "systemctl restart trc-server.service",
     }
 }
 
@@ -96,7 +99,7 @@ def send_with_retry(device: str, command: str):
                 cd_com_socket.sendall(command.encode())
             elif device == "dac":
                 dac_com_socket.sendall(command.encode())
-            elif device == "roon":
+            elif device == "roon" or device == "sys":
                 res = subprocess.check_output([command], shell=True)
             return res
         except:
