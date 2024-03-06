@@ -44,8 +44,8 @@ import { sendCommand } from './utils/utils.ts'
         <div class="button-grid button-central">
           <Button header="POWER" icon="fa-solid fa-power-off" @click="sendCommand('cd', 'power')"></Button>
           <Button header="DISP" @click="sendCommand('cd', 'display')"></Button>
-          <Button header="INFO" icon="fa-solid fa-info" @click="sendCommand('cd', 'info')"></Button>
           <div></div>
+          <Button header="INFO" icon="fa-solid fa-info" @click="sendCommand('cd', 'info')"></Button>
           <Button header="OPEN" icon="fa-solid fa-eject" @click="sendCommand('cd', 'open')"></Button>
         </div>
         <div style="height: 2px; background-color: white"></div>
@@ -73,6 +73,20 @@ import { sendCommand } from './utils/utils.ts'
           <Button header="STOP" icon="fa-solid fa-stop" @click="sendCommand('roon', 'stop')"></Button>
           <Button header="BWD" icon="fa-solid fa-backward-fast" @click="sendCommand('roon', 'backward')"></Button>
           <Button header="FWD" icon="fa-solid fa-forward-fast" @click="sendCommand('roon', 'forward')"></Button>
+        </div>
+      </div>
+
+      <div style="height: 10px; background-color: white"></div>
+
+      <div>
+        <div class="black-control-area-header">TRC Server</div>
+        <div style="height: 2px; background-color: white"></div>
+        <div class="button-grid button-central">
+          <div></div>
+          <div></div>
+          <Button header="RESET" icon="fa-solid fa-power-off" @click="sendCommand('sys', 'restart')"></Button>
+          <div></div>
+          <div></div>
         </div>
       </div>
 
